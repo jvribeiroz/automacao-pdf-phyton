@@ -2,15 +2,12 @@ import PyPDF2
 import os
 from tkinter import * 
 from tkinter import ttk
+from PIL import Image, ImageTk
 
 def mesclarPdf ():
  contador = 0
  merger = PyPDF2.PdfMerger()
 
-#  Janela onde é inserido o caminho da pasta
-#  janela_pasta = Tk()
-#  pasta1 = Label(janela_pasta, text="Digite o caminho da pasta.")
-#  pasta1.place(relx=0.5, rely=0.55, anchor= CENTER)
 
  lista_arquivos = os.listdir("PDFs")
  lista_arquivos2 = os.listdir("PDFs 2")
@@ -75,6 +72,9 @@ def mesclarPdf ():
  
 
 
+  
+
+
 # Criando janela principal
 janela = Tk()
 janela.title("VJR PDFs")
@@ -83,14 +83,19 @@ janela.title("VJR PDFs")
 janela.state('zoomed')
 
 # Adicionando imagem no icone
-imagem_icone = PhotoImage(file="icone_pdf.png")
+imagem_icone = PhotoImage(file="imagens\icone_pdf.png")
 janela.iconphoto(True, imagem_icone)
 
 #Adicionando imagem de fundo na janela principal
-imagem_fundo = PhotoImage(file ="tela_fundo.png")
-imagem_redimensionada = imagem_fundo.subsample(2,2)
+imagem_fundo = Image.open("tela_fundo.png")
+imagem_redimensionada = ImageTk.PhotoImage(imagem_fundo)
 Label_imagem = Label(janela, image=imagem_redimensionada)
-Label_imagem.pack()
+Label_imagem.pack(fill=BOTH, expand=True)
+new_width = janela.winfo_screenwidth()
+new_height = janela.winfo_screenheight()
+image = imagem_fundo.resize((new_width, new_height))
+img_tk = ImageTk.PhotoImage(image)
+Label_imagem.config(image=img_tk)
 
 # Criando e adicionando titulo principal do programa
 titulo_principal = Label(janela, text="Qual função você deseja executar?")
