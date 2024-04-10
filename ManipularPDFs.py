@@ -5,6 +5,17 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 
 def mesclarPdf ():
+ 
+ janela_entrada = Tk()
+ janela_entrada.title('Digite o caminho da pasta')
+
+ janela_entrada.pack(side="TOP", fill="BOTH", expand=True)
+
+ janela_entrada.mainloop
+
+ entrada = Entry(janela_entrada, width=10, height=10)
+ entrada.place(relx=0.5, rely=0.55, anchor= CENTER)
+
  contador = 0
  merger = PyPDF2.PdfMerger()
 
@@ -68,11 +79,6 @@ def mesclarPdf ():
      janela_erro_pasta.geometry(f"+{x}+{y}")
 
      janela_erro_pasta.mainloop()  
-             
- 
-
-
-  
 
 
 # Criando janela principal
